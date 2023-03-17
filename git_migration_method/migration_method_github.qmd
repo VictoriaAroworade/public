@@ -204,7 +204,7 @@ toc-depth: 3
 
 This report consists of all new organizations to be added to the database needed for the subsequent addition of records. Data must be cross-verified with existing Organization data in `Salesforce Production`, prior to creating new organizations.
 
-![Organizations Filler Report](https://raw.githubusercontent.com/VictoriaAroworade/public/public/git_migration_method/migration_method_github_images/field_mapping_add_performance.jpg)
+![Organizations Filler Report](https://raw.githubusercontent.com/VictoriaAroworade/public/public/git_migration_method/migration_method_github_images/start_import_add_perf_packages_asi.jpg)
 
 #### (2) Organizations with `Assays` , `Instruments` `Software`
 
