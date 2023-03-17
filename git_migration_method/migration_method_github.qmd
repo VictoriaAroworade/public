@@ -14,13 +14,15 @@ toc-depth: 3
 
 ## Step 1: Access `Data Import Wizard`
 
-![Data Import Wizard](migration_method/data_import_wizard.jpg)
+![Data Import Wizard](https://raw.githubusercontent.com/VictoriaAroworade/public/public/git_migration_method/migration_method_github_images/data_import_wizard.jpg)
 
 ## Step 2: Add New Organizations and Contacts
 
 ### (1) Select `Organisations and Contacts` Object in Import Wizard
 
-![Add New Organizations and Contacts Example](migration_method/add_new_orgs_contacts_example.jpg) \##### FOR Which Object holds the new records that will be added. (`Organizations` OR `Contacts`)
+![Add New Organizations and Contacts Example](https://raw.githubusercontent.com/VictoriaAroworade/public/public/git_migration_method/migration_method_github_images/add_new_orgs_contacts_example.jpg) 
+
+##### FOR Which Object holds the new records that will be added. (`Organizations` OR `Contacts`)
 
 ### (2) Select `None`:
 
@@ -32,7 +34,7 @@ toc-depth: 3
 
 ## Step 3: Field Mapping
 
-![Field Mapping for Organizations Example](migration_method/field_mapping_orgs_example.jpg)
+![Field Mapping for Organizations Example](https://raw.githubusercontent.com/VictoriaAroworade/public/public/git_migration_method/migration_method_github_images/field_mapping_orgs_example.jpg)
 
 ### (1) Review Mapping
 
@@ -40,7 +42,7 @@ toc-depth: 3
 
 ## Step 4: Start Import
 
-![Start Import for Organizations and Contacts Example](migration_method/start_import_orgs_and_contacts_example.jpg)
+![Start Import for Organizations and Contacts Example](https://raw.githubusercontent.com/VictoriaAroworade/public/public/git_migration_method/migration_method_github_images/start_import_orgs_and_contacts_example.jpg)
 
 # ADD NEW RECORDS
 
@@ -48,13 +50,13 @@ toc-depth: 3
 
 ## Step 1: Access `Data Import Wizard`
 
-![Data Import Wizard](migration_method/data_import_wizard.jpg)
+![Data Import Wizard](https://raw.githubusercontent.com/VictoriaAroworade/public/public/git_migration_method/migration_method_github_images/data_import_wizard.jpg)
 
 ## Step 2: Add New Records `Assay` `Instrument` `Software`
 
 ### (1) Select Object in Import Wizard
 
-![Add New Records for Assays Example](migration_method/add_new_records_assay_example.jpg)
+![Add New Records for Assays Example](https://raw.githubusercontent.com/VictoriaAroworade/public/public/git_migration_method/migration_method_github_images/add_new_records_assay_example.jpg)
 
 ##### FOR Which Object holds the new records that will be added. (`Assay`, `Instrument` OR `Software`)
 
@@ -68,7 +70,7 @@ toc-depth: 3
 
 ## Step 3: Field Mapping
 
-![Field Mapping for Assays Example](migration_method/field_mapping_assays_example.jpg)
+![Field Mapping for Assays Example](https://raw.githubusercontent.com/VictoriaAroworade/public/public/git_migration_method/migration_method_github_images/field_mapping_assays_example.jpg)
 
 ### (1) Review Mapping
 
@@ -88,7 +90,7 @@ toc-depth: 3
 
 ## Step 4: Start Import
 
-![Start Import for Assays Example](migration_method/start_import_assays_example.jpg)
+![Start Import for Assays Example](https://raw.githubusercontent.com/VictoriaAroworade/public/public/git_migration_method/migration_method_github_images/start_import_assays_example.jpg)
 
 ### Important Considerations:
 
@@ -102,17 +104,17 @@ toc-depth: 3
 
 ## Step 1: Access `Data Import Wizard`
 
-![Data Import Wizard](migration_method/data_import_wizard.jpg)
+![Data Import Wizard](https://raw.githubusercontent.com/VictoriaAroworade/public/public/git_migration_method/migration_method_github_images/data_import_wizard.jpg)
 
 ## Step 2: Add New Test Directory Packages
 
 ### (1) Select Object in Import Wizard
 
-![Add New Records for Test Directory Packages Example](migration_method/add_new_packages_example.jpg)
+![Add New Records for Test Directory Packages Example](https://raw.githubusercontent.com/VictoriaAroworade/public/public/git_migration_method/migration_method_github_images/add_new_packages_example.jpg)
 
 ### (2) Select `Salesforce.com ID`:
 
-![Selecting Salesforce.com ID Example](migration_method/add_new_packages_example_2.jpg)
+![Selecting Salesforce.com ID Example](https://raw.githubusercontent.com/VictoriaAroworade/public/public/git_migration_method/migration_method_github_images/add_new_packages_example_2.jpg)
 
 ###### FOR Which Object field in your file specifies the Master/Detail relationship. Map based on which `unique IDs` you have in your import file.
 
@@ -122,7 +124,7 @@ toc-depth: 3
 
 ## Step 3: Field Mapping
 
-![Field Mapping for Packages Example](migration_method/field_mapping_packages_example.jpg)
+![Field Mapping for Packages Example](https://raw.githubusercontent.com/VictoriaAroworade/public/public/git_migration_method/migration_method_github_images/field_mapping_packages_example.jpg)
 
 ### (1) Review Mapping
 
@@ -132,7 +134,7 @@ toc-depth: 3
 
 ## Step 4: Start Import
 
-![Start Import for Packages Example](migration_method/start_import_packages_example.jpg)
+![Start Import for Packages Example](https://raw.githubusercontent.com/VictoriaAroworade/public/public/git_migration_method/migration_method_github_images/start_import_packages_example.jpg)
 
 ### Important Considerations:
 
@@ -150,19 +152,19 @@ toc-depth: 3
 
 ## Step 1: Access `Data Import Wizard`
 
-![Data Import Wizard](migration_method/data_import_wizard.jpg)
+![Data Import Wizard](https://raw.githubusercontent.com/VictoriaAroworade/public/public/git_migration_method/migration_method_github_images/data_import_wizard.jpg)
 
 ## Step 2: Add New Records `Performance Detail Submissions`
 
 ### (1) Select Object in Import Wizard
 
-![Add New Performance Records for Packages and ASI Objects Example](migration_method/add_new_performance_records_example.jpg)
+![Add New Performance Records for Packages and ASI Objects Example](https://raw.githubusercontent.com/VictoriaAroworade/public/public/git_migration_method/migration_method_github_images/add_new_performance_records_example.jpg)
 
 ##### FOR Which Object holds the new records that will be added. (`Test Directory Packages`)
 
 ### (2) Select `Salesforce.com ID`:
 
-![Add New Records for Performance Detail Submissions](migration_method/add_new_perf_packages.jpg)
+![Add New Records for Performance Detail Submissions](https://raw.githubusercontent.com/VictoriaAroworade/public/public/git_migration_method/migration_method_github_images/add_new_perf_packages.jpg)
 
 ###### FOR Which Test Directory Package field, Assay, Instrument, Software field + Technology Submission field in your file specifies the Master/Detail relationship. Map based on which `unique IDs` you would like to add performance detail submissions to.
 
@@ -172,7 +174,7 @@ toc-depth: 3
 
 ## Step 3: Field Mapping
 
-![Field Mapping for Performance Records Example](migration_method/field_mapping_add_performance.jpg)
+![Field Mapping for Performance Records Example](https://raw.githubusercontent.com/VictoriaAroworade/public/public/git_migration_method/migration_method_github_images/field_mapping_add_performance.jpg)
 
 ### (1) Review Mapping
 
@@ -192,7 +194,7 @@ toc-depth: 3
 
 ## Step 4: Start Import
 
-![Start Import for Performance Detail Submissions Example](migration_method/start_import_add_perf_packages_asi.jpg)
+![Start Import for Performance Detail Submissions Example](https://raw.githubusercontent.com/VictoriaAroworade/public/public/git_migration_method/migration_method_github_images/start_import_add_perf_packages_asi.jpg)
 
 # REPORTS
 
@@ -208,19 +210,19 @@ This report consists of all new organizations to be added to the database needed
 
 This report consists of all `Organization IDs` mapped to the new ASI records to be added. Correct mapping of Organization ID must be verified prior to import of data into Production.
 
-![Organizations Report](migration_method/field_mapping_add_performance.jpg)
+![Organizations Report](https://raw.githubusercontent.com/VictoriaAroworade/public/public/git_migration_method/migration_method_github_images/field_mapping_add_performance.jpg)
 
 #### (3) Test Directory Report for `Packages`
 
 This report consists of all `ASI IDs` which will be used to create the Package in which the `ASI` record will lie.
 
-![Organizations Report](migration_method/field_mapping_add_performance.jpg)
+![Organizations Report](https://raw.githubusercontent.com/VictoriaAroworade/public/public/git_migration_method/migration_method_github_images/field_mapping_add_performance.jpg)
 
 #### (4) Test Directory Report with Performance for `Packages`
 
 This report consists of `Package IDs` plus the necessary `ASI IDs` in which to add performance detail records,
 
-![Organizations Report](migration_method/field_mapping_add_performance.jpg)
+![Organizations Report](https://raw.githubusercontent.com/VictoriaAroworade/public/public/git_migration_method/migration_method_github_images/field_mapping_add_performance.jpg)
 
 ## Step 2: Report Needed for Quality Control
 
