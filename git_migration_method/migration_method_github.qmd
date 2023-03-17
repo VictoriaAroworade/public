@@ -204,7 +204,7 @@ toc-depth: 3
 
 This report consists of all new organizations to be added to the database needed for the subsequent addition of records. Data must be cross-verified with existing Organization data in `Salesforce Production`, prior to creating new organizations.
 
-![Organizations Report](https://raw.githubusercontent.com/VictoriaAroworade/Victoria_A_Document_Share/public_va/add_new_performance_records_2.jpg)
+![Organizations Report](https://raw.githubusercontent.com/VictoriaAroworade/public/public/git_migration_method/migration_method_github_images/field_mapping_add_performance.jpg)
 
 #### (2) Organizations with `Assays` , `Instruments` `Software`
 
