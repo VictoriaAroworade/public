@@ -1,0 +1,717 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
+
+<meta charset="utf-8">
+<meta name="generator" content="quarto-1.2.269">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+
+<meta name="author" content="Victoria Aroworade">
+<meta name="dcterms.date" content="2023-02-22">
+
+<title>Salesforce Migration Method</title>
+<style>
+code{white-space: pre-wrap;}
+span.smallcaps{font-variant: small-caps;}
+div.columns{display: flex; gap: min(4vw, 1.5em);}
+div.column{flex: auto; overflow-x: auto;}
+div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+ul.task-list{list-style: none;}
+ul.task-list li input[type="checkbox"] {
+  width: 0.8em;
+  margin: 0 0.8em 0.2em -1.6em;
+  vertical-align: middle;
+}
+</style>
+
+
+<script src="migration_method_github_files/libs/clipboard/clipboard.min.js"></script>
+<script src="migration_method_github_files/libs/quarto-html/quarto.js"></script>
+<script src="migration_method_github_files/libs/quarto-html/popper.min.js"></script>
+<script src="migration_method_github_files/libs/quarto-html/tippy.umd.min.js"></script>
+<script src="migration_method_github_files/libs/quarto-html/anchor.min.js"></script>
+<link href="migration_method_github_files/libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="migration_method_github_files/libs/quarto-html/quarto-syntax-highlighting.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<script src="migration_method_github_files/libs/bootstrap/bootstrap.min.js"></script>
+<link href="migration_method_github_files/libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="migration_method_github_files/libs/bootstrap/bootstrap.min.css" rel="stylesheet" id="quarto-bootstrap" data-mode="light">
+
+
+</head>
+
+<body>
+
+<div id="quarto-content" class="page-columns page-rows-contents page-layout-article">
+<div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
+  <nav id="TOC" role="doc-toc" class="toc-active">
+    <h2 id="toc-title">Table of contents</h2>
+   
+  <ul>
+  <li><a href="#add-new-organizations-and-contacts" id="toc-add-new-organizations-and-contacts" class="nav-link active" data-scroll-target="#add-new-organizations-and-contacts">ADD NEW ORGANIZATIONS AND CONTACTS</a>
+  <ul class="collapse">
+  <li><a href="#step-1-access-data-import-wizard" id="toc-step-1-access-data-import-wizard" class="nav-link" data-scroll-target="#step-1-access-data-import-wizard">Step 1: Access <code>Data Import Wizard</code></a></li>
+  <li><a href="#step-2-add-new-organizations-and-contacts" id="toc-step-2-add-new-organizations-and-contacts" class="nav-link" data-scroll-target="#step-2-add-new-organizations-and-contacts">Step 2: Add New Organizations and Contacts</a>
+  <ul class="collapse">
+  <li><a href="#select-organisations-and-contacts-object-in-import-wizard" id="toc-select-organisations-and-contacts-object-in-import-wizard" class="nav-link" data-scroll-target="#select-organisations-and-contacts-object-in-import-wizard">(1) Select <code>Organisations and Contacts</code> Object in Import Wizard</a></li>
+  <li><a href="#select-none" id="toc-select-none" class="nav-link" data-scroll-target="#select-none">(2) Select <code>None</code>:</a></li>
+  <li><a href="#check-and-select-trigger-workflow-rules-and-processes" id="toc-check-and-select-trigger-workflow-rules-and-processes" class="nav-link" data-scroll-target="#check-and-select-trigger-workflow-rules-and-processes">(3) Check and Select: <code>Trigger workflow rules and processes</code></a></li>
+  <li><a href="#input-csv-file-with-character-code-utf8" id="toc-input-csv-file-with-character-code-utf8" class="nav-link" data-scroll-target="#input-csv-file-with-character-code-utf8">(4) Input <code>CSV file</code> with character code <code>UTF8</code></a></li>
+  </ul></li>
+  <li><a href="#step-3-field-mapping" id="toc-step-3-field-mapping" class="nav-link" data-scroll-target="#step-3-field-mapping">Step 3: Field Mapping</a>
+  <ul class="collapse">
+  <li><a href="#review-mapping" id="toc-review-mapping" class="nav-link" data-scroll-target="#review-mapping">(1) Review Mapping</a></li>
+  <li><a href="#map-salesforce-object-organisation-organisation-name-to-organisation-name-in-csv-header" id="toc-map-salesforce-object-organisation-organisation-name-to-organisation-name-in-csv-header" class="nav-link" data-scroll-target="#map-salesforce-object-organisation-organisation-name-to-organisation-name-in-csv-header">(2) Map Salesforce Object <code>Organisation: Organisation Name</code> to <code>Organisation Name</code> in <code>csv header</code></a></li>
+  </ul></li>
+  <li><a href="#step-4-start-import" id="toc-step-4-start-import" class="nav-link" data-scroll-target="#step-4-start-import">Step 4: Start Import</a></li>
+  </ul></li>
+  <li><a href="#add-new-records" id="toc-add-new-records" class="nav-link" data-scroll-target="#add-new-records">ADD NEW RECORDS</a>
+  <ul class="collapse">
+  <li><a href="#step-1-access-data-import-wizard-1" id="toc-step-1-access-data-import-wizard-1" class="nav-link" data-scroll-target="#step-1-access-data-import-wizard-1">Step 1: Access <code>Data Import Wizard</code></a></li>
+  <li><a href="#step-2-add-new-records-assay-instrument-software" id="toc-step-2-add-new-records-assay-instrument-software" class="nav-link" data-scroll-target="#step-2-add-new-records-assay-instrument-software">Step 2: Add New Records <code>Assay</code> <code>Instrument</code> <code>Software</code></a>
+  <ul class="collapse">
+  <li><a href="#select-object-in-import-wizard" id="toc-select-object-in-import-wizard" class="nav-link" data-scroll-target="#select-object-in-import-wizard">(1) Select Object in Import Wizard</a></li>
+  <li><a href="#select-salesforce.com-id" id="toc-select-salesforce.com-id" class="nav-link" data-scroll-target="#select-salesforce.com-id">(2) Select <code>Salesforce.com ID</code>:</a></li>
+  <li><a href="#check-and-select-trigger-workflow-rules-and-processes-1" id="toc-check-and-select-trigger-workflow-rules-and-processes-1" class="nav-link" data-scroll-target="#check-and-select-trigger-workflow-rules-and-processes-1">(3) Check and Select: <code>Trigger workflow rules and processes</code></a></li>
+  <li><a href="#input-csv-file-with-character-code-utf8-1" id="toc-input-csv-file-with-character-code-utf8-1" class="nav-link" data-scroll-target="#input-csv-file-with-character-code-utf8-1">(4) Input <code>CSV file</code> with character code <code>UTF8</code></a></li>
+  </ul></li>
+  <li><a href="#step-3-field-mapping-1" id="toc-step-3-field-mapping-1" class="nav-link" data-scroll-target="#step-3-field-mapping-1">Step 3: Field Mapping</a>
+  <ul class="collapse">
+  <li><a href="#review-mapping-1" id="toc-review-mapping-1" class="nav-link" data-scroll-target="#review-mapping-1">(1) Review Mapping</a></li>
+  <li><a href="#map-salesforce-object-companyinstitution-name-to-organisation-id-in-csv-header" id="toc-map-salesforce-object-companyinstitution-name-to-organisation-id-in-csv-header" class="nav-link" data-scroll-target="#map-salesforce-object-companyinstitution-name-to-organisation-id-in-csv-header">(2) Map Salesforce Object <code>Company/Institution Name</code> to <code>Organisation ID</code> in <code>csv header</code></a></li>
+  <li><a href="#important-considerations" id="toc-important-considerations" class="nav-link" data-scroll-target="#important-considerations">Important Considerations:</a></li>
+  </ul></li>
+  <li><a href="#step-4-start-import-1" id="toc-step-4-start-import-1" class="nav-link" data-scroll-target="#step-4-start-import-1">Step 4: Start Import</a>
+  <ul class="collapse">
+  <li><a href="#important-considerations-1" id="toc-important-considerations-1" class="nav-link" data-scroll-target="#important-considerations-1">Important Considerations:</a></li>
+  </ul></li>
+  </ul></li>
+  <li><a href="#add-new-test-directory-packages" id="toc-add-new-test-directory-packages" class="nav-link" data-scroll-target="#add-new-test-directory-packages">ADD NEW TEST DIRECTORY PACKAGES</a>
+  <ul class="collapse">
+  <li><a href="#step-1-access-data-import-wizard-2" id="toc-step-1-access-data-import-wizard-2" class="nav-link" data-scroll-target="#step-1-access-data-import-wizard-2">Step 1: Access <code>Data Import Wizard</code></a></li>
+  <li><a href="#step-2-add-new-test-directory-packages" id="toc-step-2-add-new-test-directory-packages" class="nav-link" data-scroll-target="#step-2-add-new-test-directory-packages">Step 2: Add New Test Directory Packages</a>
+  <ul class="collapse">
+  <li><a href="#select-object-in-import-wizard-1" id="toc-select-object-in-import-wizard-1" class="nav-link" data-scroll-target="#select-object-in-import-wizard-1">(1) Select Object in Import Wizard</a></li>
+  <li><a href="#select-salesforce.com-id-1" id="toc-select-salesforce.com-id-1" class="nav-link" data-scroll-target="#select-salesforce.com-id-1">(2) Select <code>Salesforce.com ID</code>:</a></li>
+  <li><a href="#check-and-select-trigger-workflow-rules-and-processes-2" id="toc-check-and-select-trigger-workflow-rules-and-processes-2" class="nav-link" data-scroll-target="#check-and-select-trigger-workflow-rules-and-processes-2">(3) Check and Select: <code>Trigger workflow rules and processes</code></a></li>
+  <li><a href="#input-csv-file-with-character-code-utf8-2" id="toc-input-csv-file-with-character-code-utf8-2" class="nav-link" data-scroll-target="#input-csv-file-with-character-code-utf8-2">(4) Input <code>CSV file</code> with character code <code>UTF8</code></a></li>
+  </ul></li>
+  <li><a href="#step-3-field-mapping-2" id="toc-step-3-field-mapping-2" class="nav-link" data-scroll-target="#step-3-field-mapping-2">Step 3: Field Mapping</a>
+  <ul class="collapse">
+  <li><a href="#review-mapping-2" id="toc-review-mapping-2" class="nav-link" data-scroll-target="#review-mapping-2">(1) Review Mapping</a></li>
+  <li><a href="#map-salesforce-objects-to-csv-headers" id="toc-map-salesforce-objects-to-csv-headers" class="nav-link" data-scroll-target="#map-salesforce-objects-to-csv-headers">(2) Map Salesforce Objects to CSV Headers</a></li>
+  </ul></li>
+  <li><a href="#step-4-start-import-2" id="toc-step-4-start-import-2" class="nav-link" data-scroll-target="#step-4-start-import-2">Step 4: Start Import</a>
+  <ul class="collapse">
+  <li><a href="#important-considerations-2" id="toc-important-considerations-2" class="nav-link" data-scroll-target="#important-considerations-2">Important Considerations:</a></li>
+  </ul></li>
+  </ul></li>
+  <li><a href="#add-new-performance-detail-submission-records" id="toc-add-new-performance-detail-submission-records" class="nav-link" data-scroll-target="#add-new-performance-detail-submission-records">ADD NEW PERFORMANCE DETAIL SUBMISSION RECORDS</a>
+  <ul class="collapse">
+  <li><a href="#step-1-access-data-import-wizard-3" id="toc-step-1-access-data-import-wizard-3" class="nav-link" data-scroll-target="#step-1-access-data-import-wizard-3">Step 1: Access <code>Data Import Wizard</code></a></li>
+  <li><a href="#step-2-add-new-records-performance-detail-submissions" id="toc-step-2-add-new-records-performance-detail-submissions" class="nav-link" data-scroll-target="#step-2-add-new-records-performance-detail-submissions">Step 2: Add New Records <code>Performance Detail Submissions</code></a>
+  <ul class="collapse">
+  <li><a href="#select-object-in-import-wizard-2" id="toc-select-object-in-import-wizard-2" class="nav-link" data-scroll-target="#select-object-in-import-wizard-2">(1) Select Object in Import Wizard</a></li>
+  <li><a href="#select-salesforce.com-id-2" id="toc-select-salesforce.com-id-2" class="nav-link" data-scroll-target="#select-salesforce.com-id-2">(2) Select <code>Salesforce.com ID</code>:</a></li>
+  <li><a href="#check-and-select-trigger-workflow-rules-and-processes-3" id="toc-check-and-select-trigger-workflow-rules-and-processes-3" class="nav-link" data-scroll-target="#check-and-select-trigger-workflow-rules-and-processes-3">(3) Check and Select: <code>Trigger workflow rules and processes</code></a></li>
+  <li><a href="#input-csv-file-with-character-code-utf8-3" id="toc-input-csv-file-with-character-code-utf8-3" class="nav-link" data-scroll-target="#input-csv-file-with-character-code-utf8-3">(4) Input <code>CSV file</code> with character code <code>UTF8</code></a></li>
+  </ul></li>
+  <li><a href="#step-3-field-mapping-3" id="toc-step-3-field-mapping-3" class="nav-link" data-scroll-target="#step-3-field-mapping-3">Step 3: Field Mapping</a>
+  <ul class="collapse">
+  <li><a href="#review-mapping-3" id="toc-review-mapping-3" class="nav-link" data-scroll-target="#review-mapping-3">(1) Review Mapping</a></li>
+  <li><a href="#map-salesforce-object-package-to-package-id-in-csv-header" id="toc-map-salesforce-object-package-to-package-id-in-csv-header" class="nav-link" data-scroll-target="#map-salesforce-object-package-to-package-id-in-csv-header">(2) Map Salesforce Object <code>Package</code> to <code>Package ID</code> in <code>csv header</code></a></li>
+  <li><a href="#map-salesforce-objects-as-needed-to-assay-instrument-software-to-assay-id-instrument-id-software-id-to-csv-header" id="toc-map-salesforce-objects-as-needed-to-assay-instrument-software-to-assay-id-instrument-id-software-id-to-csv-header" class="nav-link" data-scroll-target="#map-salesforce-objects-as-needed-to-assay-instrument-software-to-assay-id-instrument-id-software-id-to-csv-header">(3) Map Salesforce Objects as needed to <code>Assay</code> <code>Instrument</code> <code>Software</code> to <code>Assay ID</code> <code>Instrument ID</code> <code>Software ID</code> to <code>csv header</code></a></li>
+  <li><a href="#important-considerations-3" id="toc-important-considerations-3" class="nav-link" data-scroll-target="#important-considerations-3">Important Considerations:</a></li>
+  </ul></li>
+  <li><a href="#step-4-start-import-3" id="toc-step-4-start-import-3" class="nav-link" data-scroll-target="#step-4-start-import-3">Step 4: Start Import</a></li>
+  </ul></li>
+  <li><a href="#reports" id="toc-reports" class="nav-link" data-scroll-target="#reports">REPORTS</a>
+  <ul class="collapse">
+  <li><a href="#step-1-report-needed-for-migration" id="toc-step-1-report-needed-for-migration" class="nav-link" data-scroll-target="#step-1-report-needed-for-migration">Step 1: Report Needed for Migration</a></li>
+  <li><a href="#step-2-report-needed-for-quality-control" id="toc-step-2-report-needed-for-quality-control" class="nav-link" data-scroll-target="#step-2-report-needed-for-quality-control">Step 2: Report Needed for Quality Control</a>
+  <ul class="collapse">
+  <li><a href="#important-considerations-4" id="toc-important-considerations-4" class="nav-link" data-scroll-target="#important-considerations-4">Important Considerations:</a></li>
+  </ul></li>
+  </ul></li>
+  </ul>
+</nav>
+</div>
+<main class="content" id="quarto-document-content">
+
+<header id="title-block-header" class="quarto-title-block default">
+<div class="quarto-title">
+<h1 class="title">Salesforce Migration Method</h1>
+<p class="subtitle lead">All data migrations must be tested in Salesforce’s <code>Developer environment</code> prior to the <code>Partial Sandbox environment</code>. Upon verification and quality checks, the finalized clean file may be pushed into <code>Salesforce Production</code></p>
+</div>
+
+
+
+<div class="quarto-title-meta">
+
+    <div>
+    <div class="quarto-title-meta-heading">Author</div>
+    <div class="quarto-title-meta-contents">
+             <p>Victoria Aroworade </p>
+          </div>
+  </div>
+    
+    <div>
+    <div class="quarto-title-meta-heading">Published</div>
+    <div class="quarto-title-meta-contents">
+      <p class="date">February 22, 2023</p>
+    </div>
+  </div>
+  
+    
+  </div>
+  
+
+</header>
+
+<section id="add-new-organizations-and-contacts" class="level1">
+<h1>ADD NEW ORGANIZATIONS AND CONTACTS</h1>
+<section id="step-1-access-data-import-wizard" class="level2">
+<h2 class="anchored" data-anchor-id="step-1-access-data-import-wizard">Step 1: Access <code>Data Import Wizard</code></h2>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="migration_method/data_import_wizard.jpg" class="img-fluid figure-img"></p>
+<p></p><figcaption class="figure-caption">Data Import Wizard</figcaption><p></p>
+</figure>
+</div>
+</section>
+<section id="step-2-add-new-organizations-and-contacts" class="level2">
+<h2 class="anchored" data-anchor-id="step-2-add-new-organizations-and-contacts">Step 2: Add New Organizations and Contacts</h2>
+<section id="select-organisations-and-contacts-object-in-import-wizard" class="level3">
+<h3 class="anchored" data-anchor-id="select-organisations-and-contacts-object-in-import-wizard">(1) Select <code>Organisations and Contacts</code> Object in Import Wizard</h3>
+<p><img src="migration_method/add_new_orgs_contacts_example.jpg" class="img-fluid" alt="Add New Organizations and Contacts Example"> ##### FOR Which Object holds the new records that will be added. (<code>Organizations</code> OR <code>Contacts</code>)</p>
+</section>
+<section id="select-none" class="level3">
+<h3 class="anchored" data-anchor-id="select-none">(2) Select <code>None</code>:</h3>
+<section id="for-match-contact-by-and-match-account-by" class="level5">
+<h5 class="anchored" data-anchor-id="for-match-contact-by-and-match-account-by">FOR Match Contact by AND Match Account by</h5>
+</section>
+</section>
+<section id="check-and-select-trigger-workflow-rules-and-processes" class="level3">
+<h3 class="anchored" data-anchor-id="check-and-select-trigger-workflow-rules-and-processes">(3) Check and Select: <code>Trigger workflow rules and processes</code></h3>
+</section>
+<section id="input-csv-file-with-character-code-utf8" class="level3">
+<h3 class="anchored" data-anchor-id="input-csv-file-with-character-code-utf8">(4) Input <code>CSV file</code> with character code <code>UTF8</code></h3>
+</section>
+</section>
+<section id="step-3-field-mapping" class="level2">
+<h2 class="anchored" data-anchor-id="step-3-field-mapping">Step 3: Field Mapping</h2>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="migration_method/field_mapping_orgs_example.jpg" class="img-fluid figure-img"></p>
+<p></p><figcaption class="figure-caption">Field Mapping for Organizations Example</figcaption><p></p>
+</figure>
+</div>
+<section id="review-mapping" class="level3">
+<h3 class="anchored" data-anchor-id="review-mapping">(1) Review Mapping</h3>
+</section>
+<section id="map-salesforce-object-organisation-organisation-name-to-organisation-name-in-csv-header" class="level3">
+<h3 class="anchored" data-anchor-id="map-salesforce-object-organisation-organisation-name-to-organisation-name-in-csv-header">(2) Map Salesforce Object <code>Organisation: Organisation Name</code> to <code>Organisation Name</code> in <code>csv header</code></h3>
+</section>
+</section>
+<section id="step-4-start-import" class="level2">
+<h2 class="anchored" data-anchor-id="step-4-start-import">Step 4: Start Import</h2>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="migration_method/start_import_orgs_and_contacts_example.jpg" class="img-fluid figure-img"></p>
+<p></p><figcaption class="figure-caption">Start Import for Organizations and Contacts Example</figcaption><p></p>
+</figure>
+</div>
+</section>
+</section>
+<section id="add-new-records" class="level1">
+<h1>ADD NEW RECORDS</h1>
+<section id="all-records-must-be-added-to-their-respective-assay-instrument-software-objects-prior-to-creating-any-packages-which-link-these-respective-records-to-one-another." class="level5">
+<h5 class="anchored" data-anchor-id="all-records-must-be-added-to-their-respective-assay-instrument-software-objects-prior-to-creating-any-packages-which-link-these-respective-records-to-one-another.">All <code>records</code> must be added to their respective <code>Assay</code>, <code>Instrument</code>, <code>Software</code> objects prior to creating any <code>Packages</code> which link these respective records to one another.</h5>
+</section>
+<section id="step-1-access-data-import-wizard-1" class="level2">
+<h2 class="anchored" data-anchor-id="step-1-access-data-import-wizard-1">Step 1: Access <code>Data Import Wizard</code></h2>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="migration_method/data_import_wizard.jpg" class="img-fluid figure-img"></p>
+<p></p><figcaption class="figure-caption">Data Import Wizard</figcaption><p></p>
+</figure>
+</div>
+</section>
+<section id="step-2-add-new-records-assay-instrument-software" class="level2">
+<h2 class="anchored" data-anchor-id="step-2-add-new-records-assay-instrument-software">Step 2: Add New Records <code>Assay</code> <code>Instrument</code> <code>Software</code></h2>
+<section id="select-object-in-import-wizard" class="level3">
+<h3 class="anchored" data-anchor-id="select-object-in-import-wizard">(1) Select Object in Import Wizard</h3>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="migration_method/add_new_records_assay_example.jpg" class="img-fluid figure-img"></p>
+<p></p><figcaption class="figure-caption">Add New Records for Assays Example</figcaption><p></p>
+</figure>
+</div>
+<section id="for-which-object-holds-the-new-records-that-will-be-added.-assay-instrument-or-software" class="level5">
+<h5 class="anchored" data-anchor-id="for-which-object-holds-the-new-records-that-will-be-added.-assay-instrument-or-software">FOR Which Object holds the new records that will be added. (<code>Assay</code>, <code>Instrument</code> OR <code>Software</code>)</h5>
+</section>
+</section>
+<section id="select-salesforce.com-id" class="level3">
+<h3 class="anchored" data-anchor-id="select-salesforce.com-id">(2) Select <code>Salesforce.com ID</code>:</h3>
+<section id="for-which-organisation-field-in-your-file-specifies-the-masterdetail-relationship" class="level5">
+<h5 class="anchored" data-anchor-id="for-which-organisation-field-in-your-file-specifies-the-masterdetail-relationship">FOR Which Organisation field in your file specifies the Master/Detail relationship</h5>
+</section>
+</section>
+<section id="check-and-select-trigger-workflow-rules-and-processes-1" class="level3">
+<h3 class="anchored" data-anchor-id="check-and-select-trigger-workflow-rules-and-processes-1">(3) Check and Select: <code>Trigger workflow rules and processes</code></h3>
+</section>
+<section id="input-csv-file-with-character-code-utf8-1" class="level3">
+<h3 class="anchored" data-anchor-id="input-csv-file-with-character-code-utf8-1">(4) Input <code>CSV file</code> with character code <code>UTF8</code></h3>
+</section>
+</section>
+<section id="step-3-field-mapping-1" class="level2">
+<h2 class="anchored" data-anchor-id="step-3-field-mapping-1">Step 3: Field Mapping</h2>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="migration_method/field_mapping_assays_example.jpg" class="img-fluid figure-img"></p>
+<p></p><figcaption class="figure-caption">Field Mapping for Assays Example</figcaption><p></p>
+</figure>
+</div>
+<section id="review-mapping-1" class="level3">
+<h3 class="anchored" data-anchor-id="review-mapping-1">(1) Review Mapping</h3>
+</section>
+<section id="map-salesforce-object-companyinstitution-name-to-organisation-id-in-csv-header" class="level3">
+<h3 class="anchored" data-anchor-id="map-salesforce-object-companyinstitution-name-to-organisation-id-in-csv-header">(2) Map Salesforce Object <code>Company/Institution Name</code> to <code>Organisation ID</code> in <code>csv header</code></h3>
+</section>
+<section id="important-considerations" class="level3">
+<h3 class="anchored" data-anchor-id="important-considerations">Important Considerations:</h3>
+<section id="fields-are-auto-mapped-to-existing-salesforce-fields.-ensure-that-all-column-headers-in-your-import-file-maps-exactly-to-field-labels-in-salesforce.com" class="level6">
+<h6 class="anchored" data-anchor-id="fields-are-auto-mapped-to-existing-salesforce-fields.-ensure-that-all-column-headers-in-your-import-file-maps-exactly-to-field-labels-in-salesforce.com">(1) Fields are auto-mapped to existing Salesforce fields. Ensure that all column headers in your import file maps exactly to field labels in <code>Salesforce.com</code></h6>
+</section>
+<section id="review-all-mapped-fields-in-order-to-ensure-no-failed-imports--or--import-of-incorrect-data-into-salesforce.com" class="level6">
+<h6 class="anchored" data-anchor-id="review-all-mapped-fields-in-order-to-ensure-no-failed-imports--or--import-of-incorrect-data-into-salesforce.com">(2) Review all mapped fields in order to ensure no failed imports -OR- import of incorrect data into <code>Salesforce.com</code></h6>
+</section>
+<section id="salesforce-has-a-limitation-of-90-mapped-fields-per-data-import" class="level5">
+<h5 class="anchored" data-anchor-id="salesforce-has-a-limitation-of-90-mapped-fields-per-data-import">(3) Salesforce has a limitation of <code>90 mapped fields</code> per data import</h5>
+<section id="best-practice-leave-fields-unmapped-that-you-do-not-want-to-import.-do-not-map-organisation-name-in-csv-header" class="level6">
+<h6 class="anchored" data-anchor-id="best-practice-leave-fields-unmapped-that-you-do-not-want-to-import.-do-not-map-organisation-name-in-csv-header">(4) Best practice: leave fields unmapped that you do not want to import. DO NOT map <code>Organisation Name</code> in <code>csv header</code></h6>
+</section>
+<section id="best-practice-remove-all-empty-columns-from-data-set-meaning-columns-in-which-there-is-no-gathered-data-e.g.-other-columns" class="level6">
+<h6 class="anchored" data-anchor-id="best-practice-remove-all-empty-columns-from-data-set-meaning-columns-in-which-there-is-no-gathered-data-e.g.-other-columns">(5) Best practice: Remove all <code>empty columns</code> from data set meaning columns in which there is no gathered data (e.g.&nbsp;<code>Other</code> columns)</h6>
+</section>
+</section>
+</section>
+</section>
+<section id="step-4-start-import-1" class="level2">
+<h2 class="anchored" data-anchor-id="step-4-start-import-1">Step 4: Start Import</h2>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="migration_method/start_import_assays_example.jpg" class="img-fluid figure-img"></p>
+<p></p><figcaption class="figure-caption">Start Import for Assays Example</figcaption><p></p>
+</figure>
+</div>
+<section id="important-considerations-1" class="level3">
+<h3 class="anchored" data-anchor-id="important-considerations-1">Important Considerations:</h3>
+<section id="salesforce-will-review-import-and-reject-any-imports-that-do-not-qualify-for-import.-please-access-error-files-via-email-sent-by-salesforce-vs.-results.csv-file-in-data-import-wizard" class="level6">
+<h6 class="anchored" data-anchor-id="salesforce-will-review-import-and-reject-any-imports-that-do-not-qualify-for-import.-please-access-error-files-via-email-sent-by-salesforce-vs.-results.csv-file-in-data-import-wizard">(1) Salesforce will review import and reject any imports that do not qualify for import. Please access <code>error</code> files via email sent by <code>Salesforce</code> vs.&nbsp;<code>results.csv</code> file in <code>Data Import Wizard</code></h6>
+</section>
+<section id="remember-to-quality-check-data-following-import" class="level6">
+<h6 class="anchored" data-anchor-id="remember-to-quality-check-data-following-import">(2) Remember to Quality Check Data following Import</h6>
+</section>
+</section>
+</section>
+</section>
+<section id="add-new-test-directory-packages" class="level1">
+<h1>ADD NEW TEST DIRECTORY PACKAGES</h1>
+<section id="all-records-must-be-added-to-a-test-directory-package-which-allows-for-the-linkage-between-assay-instrument-and-software-as-necessary." class="level5">
+<h5 class="anchored" data-anchor-id="all-records-must-be-added-to-a-test-directory-package-which-allows-for-the-linkage-between-assay-instrument-and-software-as-necessary.">All <code>records</code> must be added to a <code>Test Directory Package</code> which allows for the linkage between <code>Assay</code>, <code>Instrument</code> and <code>Software</code> as necessary.</h5>
+</section>
+<section id="step-1-access-data-import-wizard-2" class="level2">
+<h2 class="anchored" data-anchor-id="step-1-access-data-import-wizard-2">Step 1: Access <code>Data Import Wizard</code></h2>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="migration_method/data_import_wizard.jpg" class="img-fluid figure-img"></p>
+<p></p><figcaption class="figure-caption">Data Import Wizard</figcaption><p></p>
+</figure>
+</div>
+</section>
+<section id="step-2-add-new-test-directory-packages" class="level2">
+<h2 class="anchored" data-anchor-id="step-2-add-new-test-directory-packages">Step 2: Add New Test Directory Packages</h2>
+<section id="select-object-in-import-wizard-1" class="level3">
+<h3 class="anchored" data-anchor-id="select-object-in-import-wizard-1">(1) Select Object in Import Wizard</h3>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="migration_method/add_new_packages_example.jpg" class="img-fluid figure-img"></p>
+<p></p><figcaption class="figure-caption">Add New Records for Test Directory Packages Example</figcaption><p></p>
+</figure>
+</div>
+</section>
+<section id="select-salesforce.com-id-1" class="level3">
+<h3 class="anchored" data-anchor-id="select-salesforce.com-id-1">(2) Select <code>Salesforce.com ID</code>:</h3>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="migration_method/add_new_packages_example_2.jpg" class="img-fluid figure-img"></p>
+<p></p><figcaption class="figure-caption">Selecting Salesforce.com ID Example</figcaption><p></p>
+</figure>
+</div>
+<section id="for-which-object-field-in-your-file-specifies-the-masterdetail-relationship.-map-based-on-which-unique-ids-you-have-in-your-import-file." class="level6">
+<h6 class="anchored" data-anchor-id="for-which-object-field-in-your-file-specifies-the-masterdetail-relationship.-map-based-on-which-unique-ids-you-have-in-your-import-file.">FOR Which Object field in your file specifies the Master/Detail relationship. Map based on which <code>unique IDs</code> you have in your import file.</h6>
+</section>
+</section>
+<section id="check-and-select-trigger-workflow-rules-and-processes-2" class="level3">
+<h3 class="anchored" data-anchor-id="check-and-select-trigger-workflow-rules-and-processes-2">(3) Check and Select: <code>Trigger workflow rules and processes</code></h3>
+</section>
+<section id="input-csv-file-with-character-code-utf8-2" class="level3">
+<h3 class="anchored" data-anchor-id="input-csv-file-with-character-code-utf8-2">(4) Input <code>CSV file</code> with character code <code>UTF8</code></h3>
+</section>
+</section>
+<section id="step-3-field-mapping-2" class="level2">
+<h2 class="anchored" data-anchor-id="step-3-field-mapping-2">Step 3: Field Mapping</h2>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="migration_method/field_mapping_packages_example.jpg" class="img-fluid figure-img"></p>
+<p></p><figcaption class="figure-caption">Field Mapping for Packages Example</figcaption><p></p>
+</figure>
+</div>
+<section id="review-mapping-2" class="level3">
+<h3 class="anchored" data-anchor-id="review-mapping-2">(1) Review Mapping</h3>
+</section>
+<section id="map-salesforce-objects-to-csv-headers" class="level3">
+<h3 class="anchored" data-anchor-id="map-salesforce-objects-to-csv-headers">(2) Map Salesforce Objects to CSV Headers</h3>
+<section id="assay-to-assay-id-instrument-to-instrument-id-software-to-software-id-as-needed." class="level4">
+<h4 class="anchored" data-anchor-id="assay-to-assay-id-instrument-to-instrument-id-software-to-software-id-as-needed."><code>Assay</code> to <code>Assay ID</code>, <code>Instrument</code> to <code>Instrument ID</code>, <code>Software</code> to <code>Software ID</code> as needed.</h4>
+</section>
+</section>
+</section>
+<section id="step-4-start-import-2" class="level2">
+<h2 class="anchored" data-anchor-id="step-4-start-import-2">Step 4: Start Import</h2>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="migration_method/start_import_packages_example.jpg" class="img-fluid figure-img"></p>
+<p></p><figcaption class="figure-caption">Start Import for Packages Example</figcaption><p></p>
+</figure>
+</div>
+<section id="important-considerations-2" class="level3">
+<h3 class="anchored" data-anchor-id="important-considerations-2">Important Considerations:</h3>
+<section id="packages-must-be-created-after-all-records-are-created-that-are-needed-in-a-package-and-never-prior." class="level6">
+<h6 class="anchored" data-anchor-id="packages-must-be-created-after-all-records-are-created-that-are-needed-in-a-package-and-never-prior.">(1) <code>Packages</code> must be created after <code>all records</code> are created that are needed in a package and never prior.</h6>
+</section>
+<section id="packages-must-be-created-irregardless-of-whether-there-is-a-linkage-needed-between-assay-instrument-and-software-objects." class="level6">
+<h6 class="anchored" data-anchor-id="packages-must-be-created-irregardless-of-whether-there-is-a-linkage-needed-between-assay-instrument-and-software-objects.">(2) <code>Packages</code> must be created irregardless of whether there is a linkage needed between <code>Assay</code>, <code>Instrument</code> and <code>Software</code> objects.</h6>
+</section>
+<section id="to-link-objects-between-eachother-the-unique-ids-must-be-available-in-the-assay-instrument-software-id-columns-as-needed." class="level6">
+<h6 class="anchored" data-anchor-id="to-link-objects-between-eachother-the-unique-ids-must-be-available-in-the-assay-instrument-software-id-columns-as-needed.">(3) To link objects between eachother the <code>unique IDs</code> must be available in the <code>assay</code>, <code>instrument</code>, <code>software</code> ID columns as needed.</h6>
+</section>
+<section id="best-practice-do-not-map-object-unique-ids-if-they-are-not-needed-in-your-file-and-remove-the-empty-id-columns-from-file" class="level6">
+<h6 class="anchored" data-anchor-id="best-practice-do-not-map-object-unique-ids-if-they-are-not-needed-in-your-file-and-remove-the-empty-id-columns-from-file">(4) Best practice: Do not map object <code>unique IDs</code> if they are not needed in your file and remove the <code>empty ID columns</code> from file</h6>
+</section>
+</section>
+</section>
+</section>
+<section id="add-new-performance-detail-submission-records" class="level1">
+<h1>ADD NEW PERFORMANCE DETAIL SUBMISSION RECORDS</h1>
+<section id="all-records-must-be-added-to-their-respective-test-directory-packages" class="level5">
+<h5 class="anchored" data-anchor-id="all-records-must-be-added-to-their-respective-test-directory-packages">All <code>records</code> must be added to their respective <code>Test Directory Packages</code></h5>
+</section>
+<section id="step-1-access-data-import-wizard-3" class="level2">
+<h2 class="anchored" data-anchor-id="step-1-access-data-import-wizard-3">Step 1: Access <code>Data Import Wizard</code></h2>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="migration_method/data_import_wizard.jpg" class="img-fluid figure-img"></p>
+<p></p><figcaption class="figure-caption">Data Import Wizard</figcaption><p></p>
+</figure>
+</div>
+</section>
+<section id="step-2-add-new-records-performance-detail-submissions" class="level2">
+<h2 class="anchored" data-anchor-id="step-2-add-new-records-performance-detail-submissions">Step 2: Add New Records <code>Performance Detail Submissions</code></h2>
+<section id="select-object-in-import-wizard-2" class="level3">
+<h3 class="anchored" data-anchor-id="select-object-in-import-wizard-2">(1) Select Object in Import Wizard</h3>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="migration_method/add_new_performance_records_example.jpg" class="img-fluid figure-img"></p>
+<p></p><figcaption class="figure-caption">Add New Performance Records for Packages and ASI Objects Example</figcaption><p></p>
+</figure>
+</div>
+<section id="for-which-object-holds-the-new-records-that-will-be-added.-test-directory-packages" class="level5">
+<h5 class="anchored" data-anchor-id="for-which-object-holds-the-new-records-that-will-be-added.-test-directory-packages">FOR Which Object holds the new records that will be added. (<code>Test Directory Packages</code>)</h5>
+</section>
+</section>
+<section id="select-salesforce.com-id-2" class="level3">
+<h3 class="anchored" data-anchor-id="select-salesforce.com-id-2">(2) Select <code>Salesforce.com ID</code>:</h3>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="migration_method/add_new_perf_packages.jpg" class="img-fluid figure-img"></p>
+<p></p><figcaption class="figure-caption">Add New Records for Performance Detail Submissions</figcaption><p></p>
+</figure>
+</div>
+<section id="for-which-test-directory-package-field-assay-instrument-software-field-technology-submission-field-in-your-file-specifies-the-masterdetail-relationship.-map-based-on-which-unique-ids-you-would-like-to-add-performance-detail-submissions-to." class="level6">
+<h6 class="anchored" data-anchor-id="for-which-test-directory-package-field-assay-instrument-software-field-technology-submission-field-in-your-file-specifies-the-masterdetail-relationship.-map-based-on-which-unique-ids-you-would-like-to-add-performance-detail-submissions-to.">FOR Which Test Directory Package field, Assay, Instrument, Software field + Technology Submission field in your file specifies the Master/Detail relationship. Map based on which <code>unique IDs</code> you would like to add performance detail submissions to.</h6>
+</section>
+</section>
+<section id="check-and-select-trigger-workflow-rules-and-processes-3" class="level3">
+<h3 class="anchored" data-anchor-id="check-and-select-trigger-workflow-rules-and-processes-3">(3) Check and Select: <code>Trigger workflow rules and processes</code></h3>
+</section>
+<section id="input-csv-file-with-character-code-utf8-3" class="level3">
+<h3 class="anchored" data-anchor-id="input-csv-file-with-character-code-utf8-3">(4) Input <code>CSV file</code> with character code <code>UTF8</code></h3>
+</section>
+</section>
+<section id="step-3-field-mapping-3" class="level2">
+<h2 class="anchored" data-anchor-id="step-3-field-mapping-3">Step 3: Field Mapping</h2>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="migration_method/field_mapping_add_performance.jpg" class="img-fluid figure-img"></p>
+<p></p><figcaption class="figure-caption">Field Mapping for Performance Records Example</figcaption><p></p>
+</figure>
+</div>
+<section id="review-mapping-3" class="level3">
+<h3 class="anchored" data-anchor-id="review-mapping-3">(1) Review Mapping</h3>
+</section>
+<section id="map-salesforce-object-package-to-package-id-in-csv-header" class="level3">
+<h3 class="anchored" data-anchor-id="map-salesforce-object-package-to-package-id-in-csv-header">(2) Map Salesforce Object <code>Package</code> to <code>Package ID</code> in <code>csv header</code></h3>
+</section>
+<section id="map-salesforce-objects-as-needed-to-assay-instrument-software-to-assay-id-instrument-id-software-id-to-csv-header" class="level3">
+<h3 class="anchored" data-anchor-id="map-salesforce-objects-as-needed-to-assay-instrument-software-to-assay-id-instrument-id-software-id-to-csv-header">(3) Map Salesforce Objects as needed to <code>Assay</code> <code>Instrument</code> <code>Software</code> to <code>Assay ID</code> <code>Instrument ID</code> <code>Software ID</code> to <code>csv header</code></h3>
+</section>
+<section id="important-considerations-3" class="level3">
+<h3 class="anchored" data-anchor-id="important-considerations-3">Important Considerations:</h3>
+<section id="populate-all-lookup-fields-assay-instrument-andor-software-for-objects-in-your-file-to-allow-for-lookups-that-are-needed-for-performance-detail-submissions" class="level6">
+<h6 class="anchored" data-anchor-id="populate-all-lookup-fields-assay-instrument-andor-software-for-objects-in-your-file-to-allow-for-lookups-that-are-needed-for-performance-detail-submissions">(1) Populate all lookup fields <code>Assay</code> <code>Instrument</code> and/or <code>Software</code> for objects in your file to allow for lookups that are needed for Performance Detail Submissions</h6>
+</section>
+<section id="always-include-test-directory-packages-in-migration-along-with-the-necessary-objects-to-add-into-salesforce" class="level6">
+<h6 class="anchored" data-anchor-id="always-include-test-directory-packages-in-migration-along-with-the-necessary-objects-to-add-into-salesforce">(2) Always include <code>Test Directory Packages</code> in migration along with the necessary objects to add into Salesforce</h6>
+</section>
+<section id="always-add-performance-detail-submissions-in-migration-even-if-there-is-no-current-performance-to-add-in-the-database" class="level6">
+<h6 class="anchored" data-anchor-id="always-add-performance-detail-submissions-in-migration-even-if-there-is-no-current-performance-to-add-in-the-database">(3) Always add <code>Performance Detail Submissions</code> in migration even if there is no current performance to add in the database</h6>
+</section>
+<section id="best-practice-remove-all-empty-columns-from-data-set-meaning-columns-in-which-there-is-no-gathered-data-e.g.-other-columns-1" class="level6">
+<h6 class="anchored" data-anchor-id="best-practice-remove-all-empty-columns-from-data-set-meaning-columns-in-which-there-is-no-gathered-data-e.g.-other-columns-1">(4) Best practice: Remove all <code>empty columns</code> from data set meaning columns in which there is no gathered data (e.g.&nbsp;<code>Other</code> columns)</h6>
+</section>
+</section>
+</section>
+<section id="step-4-start-import-3" class="level2">
+<h2 class="anchored" data-anchor-id="step-4-start-import-3">Step 4: Start Import</h2>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="migration_method/start_import_add_perf_packages_asi.jpg" class="img-fluid figure-img"></p>
+<p></p><figcaption class="figure-caption">Start Import for Performance Detail Submissions Example</figcaption><p></p>
+</figure>
+</div>
+</section>
+</section>
+<section id="reports" class="level1">
+<h1>REPORTS</h1>
+<section id="step-1-report-needed-for-migration" class="level2">
+<h2 class="anchored" data-anchor-id="step-1-report-needed-for-migration">Step 1: Report Needed for Migration</h2>
+<section id="organizations-report" class="level4">
+<h4 class="anchored" data-anchor-id="organizations-report">(1) Organizations Report</h4>
+<p>This report consists of all new organizations to be added to the database needed for the subsequent addition of records. Data must be cross-verified with existing Organization data in <code>Salesforce Production</code>, prior to creating new organizations.</p>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="https://raw.githubusercontent.com/VictoriaAroworade/Victoria_A_Document_Share/public_va/add_new_performance_records_2.jpg" class="img-fluid figure-img"></p>
+<p></p><figcaption class="figure-caption">Organizations Report</figcaption><p></p>
+</figure>
+</div>
+</section>
+<section id="organizations-with-assays-instruments-software" class="level4">
+<h4 class="anchored" data-anchor-id="organizations-with-assays-instruments-software">(2) Organizations with <code>Assays</code> , <code>Instruments</code> <code>Software</code></h4>
+<p>This report consists of all <code>Organization IDs</code> mapped to the new ASI records to be added. Correct mapping of Organization ID must be verified prior to import of data into Production.</p>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="migration_method/field_mapping_add_performance.jpg" class="img-fluid figure-img"></p>
+<p></p><figcaption class="figure-caption">Organizations Report</figcaption><p></p>
+</figure>
+</div>
+</section>
+<section id="test-directory-report-for-packages" class="level4">
+<h4 class="anchored" data-anchor-id="test-directory-report-for-packages">(3) Test Directory Report for <code>Packages</code></h4>
+<p>This report consists of all <code>ASI IDs</code> which will be used to create the Package in which the <code>ASI</code> record will lie.</p>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="migration_method/field_mapping_add_performance.jpg" class="img-fluid figure-img"></p>
+<p></p><figcaption class="figure-caption">Organizations Report</figcaption><p></p>
+</figure>
+</div>
+</section>
+<section id="test-directory-report-with-performance-for-packages" class="level4">
+<h4 class="anchored" data-anchor-id="test-directory-report-with-performance-for-packages">(4) Test Directory Report with Performance for <code>Packages</code></h4>
+<p>This report consists of <code>Package IDs</code> plus the necessary <code>ASI IDs</code> in which to add performance detail records,</p>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="migration_method/field_mapping_add_performance.jpg" class="img-fluid figure-img"></p>
+<p></p><figcaption class="figure-caption">Organizations Report</figcaption><p></p>
+</figure>
+</div>
+</section>
+</section>
+<section id="step-2-report-needed-for-quality-control" class="level2">
+<h2 class="anchored" data-anchor-id="step-2-report-needed-for-quality-control">Step 2: Report Needed for Quality Control</h2>
+<section id="test-directory-developer-organizations-report" class="level4">
+<h4 class="anchored" data-anchor-id="test-directory-developer-organizations-report">(1) Test Directory <code>Developer</code> Organizations Report</h4>
+</section>
+<section id="test-directory-developer-report-for-assays-instrument-software" class="level4">
+<h4 class="anchored" data-anchor-id="test-directory-developer-report-for-assays-instrument-software">(2) Test Directory <code>Developer</code> Report for <code>Assays</code>, <code>Instrument</code>, <code>Software</code></h4>
+</section>
+<section id="test-directory-developer-report-with-performance-for-packages" class="level4">
+<h4 class="anchored" data-anchor-id="test-directory-developer-report-with-performance-for-packages">(3) Test Directory <code>Developer</code> Report with Performance for <code>Packages</code></h4>
+</section>
+<section id="important-considerations-4" class="level3">
+<h3 class="anchored" data-anchor-id="important-considerations-4">Important Considerations:</h3>
+<section id="ensure-no-duplicate-data-is-added-to-salesforce-production-e.g.-organizations-asi-or-performance" class="level6">
+<h6 class="anchored" data-anchor-id="ensure-no-duplicate-data-is-added-to-salesforce-production-e.g.-organizations-asi-or-performance">(1) Ensure <code>no duplicate data</code> is added to Salesforce Production (e.g.&nbsp;<code>Organizations, ASI or performance</code>)</h6>
+</section>
+<section id="ensure-data-aligns-correctly-via-unique-ids-tests-are-mapped-to-the-correct-organizations-asi-and-performance-details" class="level6">
+<h6 class="anchored" data-anchor-id="ensure-data-aligns-correctly-via-unique-ids-tests-are-mapped-to-the-correct-organizations-asi-and-performance-details">(2) Ensure data aligns correctly (<code>via unique IDs</code>), tests are mapped to the correct <code>organizations</code>, <code>ASI</code> and <code>performance details</code></h6>
+</section>
+<section id="ensure-data-alignsmaps-correctly-to-the-correct-fieldsvalues-of-migrated-landscape" class="level6">
+<h6 class="anchored" data-anchor-id="ensure-data-alignsmaps-correctly-to-the-correct-fieldsvalues-of-migrated-landscape">(3) Ensure data aligns/maps correctly to the correct fields/values of <code>migrated landscape</code></h6>
+</section>
+<section id="ensure-complete-data-for-mandatory-fields-e.g.-unknownsnot-applicables-zeros-inputted-for-unknown-numerical-data" class="level6">
+<h6 class="anchored" data-anchor-id="ensure-complete-data-for-mandatory-fields-e.g.-unknownsnot-applicables-zeros-inputted-for-unknown-numerical-data">(4) Ensure <code>complete data</code> for mandatory fields (e.g., unknowns/not applicables, zero’s inputted for unknown numerical data)</h6>
+</section>
+<section id="ensure-packages-are-created-for-all-asi-added-to-the-database" class="level6">
+<h6 class="anchored" data-anchor-id="ensure-packages-are-created-for-all-asi-added-to-the-database">(5) Ensure <code>packages</code> are created for all <code>ASI</code> added to the database</h6>
+</section>
+<section id="ensure-sense-checking-of-migrated-data-is-completed-prior-to-migration-into-production.-e.g.-matching-data-fields-in-different-objects-are-aligned-and-corresponding-fields-are-aligned" class="level6">
+<h6 class="anchored" data-anchor-id="ensure-sense-checking-of-migrated-data-is-completed-prior-to-migration-into-production.-e.g.-matching-data-fields-in-different-objects-are-aligned-and-corresponding-fields-are-aligned">(6) Ensure <code>Sense-checking</code> of migrated data is completed prior to migration into production. (e.g.&nbsp;matching data fields in different objects are aligned and corresponding fields are aligned)</h6>
+</section>
+<section id="ensure-data-is-quality-checked-by-migrator-following-production-migration" class="level6">
+<h6 class="anchored" data-anchor-id="ensure-data-is-quality-checked-by-migrator-following-production-migration">(7) Ensure data is quality checked by <code>migrator</code> following <code>production</code> migration</h6>
+</section>
+</section>
+</section>
+</section>
+
+</main>
+<!-- /main column -->
+<script id="quarto-html-after-body" type="application/javascript">
+window.document.addEventListener("DOMContentLoaded", function (event) {
+  const toggleBodyColorMode = (bsSheetEl) => {
+    const mode = bsSheetEl.getAttribute("data-mode");
+    const bodyEl = window.document.querySelector("body");
+    if (mode === "dark") {
+      bodyEl.classList.add("quarto-dark");
+      bodyEl.classList.remove("quarto-light");
+    } else {
+      bodyEl.classList.add("quarto-light");
+      bodyEl.classList.remove("quarto-dark");
+    }
+  }
+  const toggleBodyColorPrimary = () => {
+    const bsSheetEl = window.document.querySelector("link#quarto-bootstrap");
+    if (bsSheetEl) {
+      toggleBodyColorMode(bsSheetEl);
+    }
+  }
+  toggleBodyColorPrimary();  
+  const icon = "";
+  const anchorJS = new window.AnchorJS();
+  anchorJS.options = {
+    placement: 'right',
+    icon: icon
+  };
+  anchorJS.add('.anchored');
+  const clipboard = new window.ClipboardJS('.code-copy-button', {
+    target: function(trigger) {
+      return trigger.previousElementSibling;
+    }
+  });
+  clipboard.on('success', function(e) {
+    // button target
+    const button = e.trigger;
+    // don't keep focus
+    button.blur();
+    // flash "checked"
+    button.classList.add('code-copy-button-checked');
+    var currentTitle = button.getAttribute("title");
+    button.setAttribute("title", "Copied!");
+    let tooltip;
+    if (window.bootstrap) {
+      button.setAttribute("data-bs-toggle", "tooltip");
+      button.setAttribute("data-bs-placement", "left");
+      button.setAttribute("data-bs-title", "Copied!");
+      tooltip = new bootstrap.Tooltip(button, 
+        { trigger: "manual", 
+          customClass: "code-copy-button-tooltip",
+          offset: [0, -8]});
+      tooltip.show();    
+    }
+    setTimeout(function() {
+      if (tooltip) {
+        tooltip.hide();
+        button.removeAttribute("data-bs-title");
+        button.removeAttribute("data-bs-toggle");
+        button.removeAttribute("data-bs-placement");
+      }
+      button.setAttribute("title", currentTitle);
+      button.classList.remove('code-copy-button-checked');
+    }, 1000);
+    // clear code selection
+    e.clearSelection();
+  });
+  function tippyHover(el, contentFn) {
+    const config = {
+      allowHTML: true,
+      content: contentFn,
+      maxWidth: 500,
+      delay: 100,
+      arrow: false,
+      appendTo: function(el) {
+          return el.parentElement;
+      },
+      interactive: true,
+      interactiveBorder: 10,
+      theme: 'quarto',
+      placement: 'bottom-start'
+    };
+    window.tippy(el, config); 
+  }
+  const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+  for (var i=0; i<noterefs.length; i++) {
+    const ref = noterefs[i];
+    tippyHover(ref, function() {
+      // use id or data attribute instead here
+      let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
+      try { href = new URL(href).hash; } catch {}
+      const id = href.replace(/^#\/?/, "");
+      const note = window.document.getElementById(id);
+      return note.innerHTML;
+    });
+  }
+  const findCites = (el) => {
+    const parentEl = el.parentElement;
+    if (parentEl) {
+      const cites = parentEl.dataset.cites;
+      if (cites) {
+        return {
+          el,
+          cites: cites.split(' ')
+        };
+      } else {
+        return findCites(el.parentElement)
+      }
+    } else {
+      return undefined;
+    }
+  };
+  var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+  for (var i=0; i<bibliorefs.length; i++) {
+    const ref = bibliorefs[i];
+    const citeInfo = findCites(ref);
+    if (citeInfo) {
+      tippyHover(citeInfo.el, function() {
+        var popup = window.document.createElement('div');
+        citeInfo.cites.forEach(function(cite) {
+          var citeDiv = window.document.createElement('div');
+          citeDiv.classList.add('hanging-indent');
+          citeDiv.classList.add('csl-entry');
+          var biblioDiv = window.document.getElementById('ref-' + cite);
+          if (biblioDiv) {
+            citeDiv.innerHTML = biblioDiv.innerHTML;
+          }
+          popup.appendChild(citeDiv);
+        });
+        return popup.innerHTML;
+      });
+    }
+  }
+});
+</script>
+</div> <!-- /content -->
+
+
+
+</body></html>
