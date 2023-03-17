@@ -1,5 +1,5 @@
 ---
-title: Salesforce Migration Method Test
+title: Salesforce Migration Method
 subtitle: All data migrations must be tested in Salesforce's `Developer environment` prior to the `Partial Sandbox environment`. Upon verification and quality checks, the finalized clean file may be pushed into `Salesforce Production`
 author: "Victoria Aroworade"
 date: "February 22, 2023"
