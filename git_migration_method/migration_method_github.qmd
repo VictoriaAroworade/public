@@ -247,3 +247,7 @@ This report consists of `Package IDs` plus the necessary `ASI IDs` in which to a
 ###### (6) Ensure `Sense-checking` of migrated data is completed prior to migration into production. (e.g. matching data fields in different objects are aligned and corresponding fields are aligned)
 
 ###### (7) Ensure data is quality checked by `migrator` following `production` migration
+
+# COMING SOON!
+
+`How to mass update records on Salesforce using Data Import Wizard!`
